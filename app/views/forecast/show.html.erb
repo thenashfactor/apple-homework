@@ -1,0 +1,14 @@
+<h1>Weather Forecast for <%= @address.formatted_address %></h1>
+<div>
+  <h2>Daily Forecast <%= '(cached - up to 30 mins out-of-date)' if @forecast.cached %></h2>
+    <div>
+    <%= render partial: "/forecast/current_forecast", locals: { current: @forecast.current, daily: @forecast.daily[0] } %>
+  </div>
+  <br/>
+  <% @forecast.daily.each do |daily| %>
+    <div>
+      <%= render partial: "/forecast/daily_forecast", locals: { daily: daily } %>
+    </div>
+    <br/>
+  <% end %>
+</div>

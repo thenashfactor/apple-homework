@@ -1,0 +1,9 @@
+<h1>
+    <%= "Weather Forecast" %>
+</h1>
+<div>
+  <%= form_tag forecast_path, method: :get do %>
+    <%= text_field_tag :address, nil, placeholder: 'Enter address' %>
+    <%= submit_tag 'Get Forecast' %>
+  <% end %>
+</div>

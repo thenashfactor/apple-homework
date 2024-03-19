@@ -1,0 +1,30 @@
+<table>
+  <tr>
+    <th align="left"><i><%= @forecast.current['day'] %></i></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><b>Summary:</b></td>
+    <td><%= current['weather'][0]['description'].capitalize %></td>
+  </tr>
+  <tr>
+    <td><b>Temperature:</b></td>
+    <td><%= current['temp'] %>&deg;</td>
+  </tr>
+  <tr>
+    <td><b>Feels Like:</b></td>
+    <td><%= current['feels_like'] %>&deg;</td>
+  </tr>
+  <tr>
+    <td><b>High / Low:</b></td>
+    <td><%= daily['temp']['min'] %>&deg;/ <%= daily['temp']['max'] %>&deg;</td>
+  </tr>
+  <tr>
+    <td><b>Humidity:</b></td>
+    <td><%= current['humidity'] %>%</td>
+  </tr>
+  <tr>
+    <td><b>Wind Speed:</b></td>
+    <td><%= current['wind_speed'] %>mph</td>
+  </tr>
+</table>
