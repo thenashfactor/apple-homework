@@ -14,23 +14,24 @@ class OpenWeatherClientTest < ActiveSupport::TestCase
 
   test 'get_weather_for_address error' do
     error_response = {
-      "cod"=> 400,
-      "message"=> "Invalid date format",
-      "parameters"=> [
-          "date"
+      'cod' => 400,
+      'message' => 'Invalid date format',
+      'parameters' => [
+        'date'
       ]
     }.to_json
-    stub_request(:get, OPEN_WEATHER_ONECALL_ENDPOINT).
-      with(
+    stub_request(:get, OPEN_WEATHER_ONECALL_ENDPOINT)
+      .with(
         query: hash_including({}),
         headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Host'=>'api.openweathermap.org',
-          'User-Agent'=>'Ruby'
-        }).
-      to_return(status: 400, body: error_response, headers: {})
-    geocoded_address = @geocoder_client.geocode('New York, NY') # no stub defined for 'foo' 
+          'Accept' => '*/*',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Host' => 'api.openweathermap.org',
+          'User-Agent' => 'Ruby'
+        }
+      )
+      .to_return(status: 400, body: error_response, headers: {})
+    geocoded_address = @geocoder_client.geocode('New York, NY') # no stub defined for 'foo'
     error = assert_raises(StandardError) do
       @openweather_client.get_weather_for_address(geocoded_address)
     end

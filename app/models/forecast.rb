@@ -1,4 +1,4 @@
-class Forecast 
+class Forecast
   include ActiveModel::API
 
   attr_reader :geocoded_address, :current, :daily, :cached
@@ -15,7 +15,7 @@ class Forecast
   def get_forecast
     forecast = Rails.cache.read("/forecast/#{@geocoded_address.postal_code}") if @geocoded_address.postal_code
     @cached = true if forecast
-    if !@cached
+    unless @cached
       openweather_client = Client::OpenWeatherClient.new
       forecast = format_forecast(openweather_client.get_weather_for_address(@geocoded_address))
       if @geocoded_address.postal_code
@@ -23,8 +23,8 @@ class Forecast
       end
     end
     @current = forecast['current']
-    @daily = forecast['daily'] 
-    return self
+    @daily = forecast['daily']
+    self
   end
 
   def format_forecast(result)
@@ -32,6 +32,6 @@ class Forecast
       daily_time = Time.at(daily_forecast['dt']).localtime.to_datetime.strftime('%A %B %d')
       result['daily'][i]['day'] = Time.at(daily_forecast['dt']).localtime.to_datetime.strftime('%A %B %d')
     end
-    return result
+    result
   end
 end
