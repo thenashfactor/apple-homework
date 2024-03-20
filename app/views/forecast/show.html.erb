@@ -1,14 +1,15 @@
-<h1>Weather Forecast for <%= @address.formatted_address %></h1>
-<div>
-  <h2>Daily Forecast <%= '(cached - up to 30 mins out-of-date)' if @forecast.cached %></h2>
-    <div>
-    <%= render partial: "/forecast/current_forecast", locals: { current: @forecast.current, daily: @forecast.daily[0] } %>
+<% if @error %>
+  <h1>Encountered error during processing:</h2>
+  <h4><%= @error %></h4>
+<% else %>
+  <h2>Weather Forecast for <%= @forecast.geocoded_address.address %></h2>
+  <div>
+    <h3>Daily Forecast <%= '(cached - up to 30 mins out-of-date)' if @forecast.cached %></h3>
+    <table>
+      <%= render partial: "/forecast/current_forecast", locals: { current: @forecast.current, daily: @forecast.daily[0] } %>
+      <% @forecast.daily[1..-1].each do |daily| %>
+        <%= render partial: "/forecast/daily_forecast", locals: { daily: daily } %>
+      <% end %>
+    </table>
   </div>
-  <br/>
-  <% @forecast.daily.each do |daily| %>
-    <div>
-      <%= render partial: "/forecast/daily_forecast", locals: { daily: daily } %>
-    </div>
-    <br/>
-  <% end %>
-</div>
+<% end%>

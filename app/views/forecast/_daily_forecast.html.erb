@@ -1,21 +1,23 @@
-<table>
-  <tr>
-    <th align="left"><i><%= daily['day'] %></i></th>
-    <th></th>
-  <tr>
-    <td><b>Summary:</b></td>
-    <td><%= daily['summary'].capitalize %></td>
-  </tr>
-  <tr>
-    <td><b>High / Low:</b></td>
-    <td><%= daily['temp']['min'] %>&deg;/ <%= daily['temp']['max'] %>&deg;</td>
-  </tr>
-  <tr>
-    <td><b>Humidity:</b></td>
-    <td><%= daily['humidity'] %>%</td>
-  </tr>
-  <tr>
-    <td><b>Wind Speed:</b></td>
-    <td><%= daily['wind_speed'] %>mph</td>
-  </tr>
-</table>
+<tr>
+  <th align="left"><i><%= daily['day'] %></i></th>
+  <th></th>
+<tr>
+  <td><b>Summary:</b></td>
+  <td><%= daily['summary'].capitalize %></td>
+</tr>
+<tr>
+  <td><b>High / Low:</b></td>
+  <td><%= daily['temp']['min'] %>&deg;/ <%= daily['temp']['max'] %>&deg;</td>
+</tr>
+<tr>
+  <td><b>Humidity:</b></td>
+  <td><%= daily['humidity'] %>%</td>
+</tr>
+<tr>
+  <td><b>Wind Speed:</b></td>
+  <td><%= daily['wind_speed'] %>mph</td>
+</tr>
+<tr>
+  <td><hr></td>
+  <td></td>
+</tr>

@@ -16,6 +16,7 @@ Rails.application.configure do
   # recommended that you enable it in continuous integration systems to ensure eager
   # loading is working properly before deploying your code.
   config.eager_load = ENV["CI"].present?
+  #config.autoload_paths += %W(#{config.root}/lib/**)
 
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
@@ -23,10 +24,12 @@ Rails.application.configure do
     "Cache-Control" => "public, max-age=#{1.hour.to_i}"
   }
 
-  # Show full error reports and disable caching.
+  # Show full error reports and enable caching.
+  config.action_controller.perform_caching = true
+  config.action_controller.enable_fragment_cache_logging = true
+  config.cache_store = :memory_store
+
   config.consider_all_requests_local = true
-  config.action_controller.perform_caching = false
-  config.cache_store = :null_store
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable

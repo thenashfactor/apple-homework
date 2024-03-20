@@ -1,37 +1,36 @@
 class Forecast 
   include ActiveModel::API
 
-  attr_reader :address, :current, :daily, :cached
+  attr_reader :geocoded_address, :current, :daily, :cached
 
-  def initialize(address)
-    @address = address
-    @cached = false
+  def initialize(raw_address)
+    @geocoded_address = Client::GeocoderClient.new.geocode(raw_address)
     @current = nil
     @daily = nil
+    @cached = false
   end
 
   # Forecast is cached for 30 mins
+  # Caching scheme is based on postal_code
   def get_forecast
-    client = Client::OpenWeatherClient.new
-    formatted_forecast = Rails.cache.read("/forecast/#{address.postal_code}")
-    if formatted_forecast
-      @cached = true
-    else
-      # Cache forecast for 30 mins
-      formatted_forecast = format_forecast(client.get_weather_for_address(address))
-      Rails.cache.write("/forecast/#{address.postal_code}", formatted_forecast, expires_in: 30.minutes)
+    forecast = Rails.cache.read("/forecast/#{@geocoded_address.postal_code}") if @geocoded_address.postal_code
+    @cached = true if forecast
+    if !@cached
+      openweather_client = Client::OpenWeatherClient.new
+      forecast = format_forecast(openweather_client.get_weather_for_address(@geocoded_address))
+      if @geocoded_address.postal_code
+        Rails.cache.write("/forecast/#{@geocoded_address.postal_code}", forecast, expires_in: 30.minutes)
+      end
     end
-    pp formatted_forecast
-    @current = formatted_forecast['current']
-    @daily = formatted_forecast['daily'] 
+    @current = forecast['current']
+    @daily = forecast['daily'] 
     return self
   end
 
   def format_forecast(result)
-    result['current']['day'] = 'Today'
-    result['daily'][0]['day'] = 'Today'
     result['daily'].each_with_index do |daily_forecast, i|
-      result['daily'][i]['day'] = Time.at(daily_forecast['dt']).utc.to_datetime.strftime('%A %B %d')
+      daily_time = Time.at(daily_forecast['dt']).localtime.to_datetime.strftime('%A %B %d')
+      result['daily'][i]['day'] = Time.at(daily_forecast['dt']).localtime.to_datetime.strftime('%A %B %d')
     end
     return result
   end
