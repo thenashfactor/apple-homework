@@ -9,7 +9,7 @@ class ForecastControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'show success' do
-    get forecast_path + '?address=foo'
+    get "#{forecast_path}?address=foo"
     assert_response :success
   end
 
@@ -21,8 +21,8 @@ class ForecastControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'show internal error' do
-    Forecast.any_instance.expects(:get_forecast).raises(StandardError.new('some error'))
-    get forecast_path + '?address=foo'
+    Forecast.any_instance.expects(:forecast).raises(StandardError.new('some error'))
+    get "#{forecast_path}?address=foo"
     assert response.code == '500'
     assert_match 'Encountered error during processing', response.body
     assert_match 'some error', response.body

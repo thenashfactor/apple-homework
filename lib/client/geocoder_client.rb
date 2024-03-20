@@ -1,8 +1,7 @@
+# Geocode a supplied address using geocoder gem functionality
 class Client::GeocoderClient
-  # Geocode a supplied address
-  #
+
   # Raises error message if geocoding fails
-  #
   # country_code defaults to 'US' unless the country code is supplied after
   # the last comma in the supplied address
   def geocode(raw_address)

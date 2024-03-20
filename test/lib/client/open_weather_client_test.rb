@@ -7,12 +7,12 @@ class OpenWeatherClientTest < ActiveSupport::TestCase
     @openweather_client = Client::OpenWeatherClient.new
   end
 
-  test 'get_weather_for_address success' do
+  test 'forecast_for_address success' do
     geocoded_address = @geocoder_client.geocode('New York, NY') # stubbed in test_helper.rb
-    @openweather_client.get_weather_for_address(geocoded_address)
+    @openweather_client.forecast_for_address(geocoded_address)
   end
 
-  test 'get_weather_for_address error' do
+  test 'forecast_for_address error' do
     error_response = {
       'cod' => 400,
       'message' => 'Invalid date format',
@@ -33,7 +33,7 @@ class OpenWeatherClientTest < ActiveSupport::TestCase
       .to_return(status: 400, body: error_response, headers: {})
     geocoded_address = @geocoder_client.geocode('New York, NY') # no stub defined for 'foo'
     error = assert_raises(StandardError) do
-      @openweather_client.get_weather_for_address(geocoded_address)
+      @openweather_client.forecast_for_address(geocoded_address)
     end
     assert_equal 'OpenWeatherClient: Error response: 400, Invalid date format', error.message
   end

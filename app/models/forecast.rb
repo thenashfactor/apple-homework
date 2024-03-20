@@ -1,3 +1,4 @@
+# Retrieves and massages OpenWeather API current and daily forecasts
 class Forecast
   include ActiveModel::API
 
@@ -12,12 +13,12 @@ class Forecast
 
   # Forecast is cached for 30 mins
   # Caching scheme is based on postal_code
-  def get_forecast
+  def forecast
     forecast = Rails.cache.read("/forecast/#{@geocoded_address.postal_code}") if @geocoded_address.postal_code
     @cached = true if forecast
     unless @cached
       openweather_client = Client::OpenWeatherClient.new
-      forecast = format_forecast(openweather_client.get_weather_for_address(@geocoded_address))
+      forecast = format_forecast(openweather_client.forecast_for_address(@geocoded_address))
       if @geocoded_address.postal_code
         Rails.cache.write("/forecast/#{@geocoded_address.postal_code}", forecast, expires_in: 30.minutes)
       end
@@ -29,7 +30,6 @@ class Forecast
 
   def format_forecast(result)
     result['daily'].each_with_index do |daily_forecast, i|
-      daily_time = Time.at(daily_forecast['dt']).localtime.to_datetime.strftime('%A %B %d')
       result['daily'][i]['day'] = Time.at(daily_forecast['dt']).localtime.to_datetime.strftime('%A %B %d')
     end
     result

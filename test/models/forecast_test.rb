@@ -2,7 +2,7 @@ require 'test_helper'
 
 # Geocoder stubs are defined in test_helper
 class ForecastTest < ActiveSupport::TestCase
-  test 'get_forecast uncached and cached' do
+  test 'forecast uncached and cached' do
     expected_forecast_current = {
       'dt' => 1_710_880_364,
       'temp' => 40.86,
@@ -21,12 +21,12 @@ class ForecastTest < ActiveSupport::TestCase
     }]
 
     forecast = Forecast.new('New York, NY')
-    forecast_result = forecast.get_forecast
+    forecast_result = forecast.forecast
     assert forecast_result.current == expected_forecast_current
     assert forecast_result.daily == expected_forecast_daily
     assert !forecast_result.cached
 
-    forecast_result = forecast.get_forecast
+    forecast_result = forecast.forecast
     assert forecast_result.current == expected_forecast_current
     assert forecast_result.daily == expected_forecast_daily
     assert forecast_result.cached

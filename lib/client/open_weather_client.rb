@@ -1,8 +1,8 @@
 class Client::OpenWeatherClient
-  OPEN_WEATHER_ONECALL_ENDPOINT = 'https://api.openweathermap.org/data/3.0/onecall'
-  OPEN_WEATHER_API_KEY = '9a22a4c62a72679c1bcb33d54c02d33e'
+  OPEN_WEATHER_ONECALL_ENDPOINT = 'https://api.openweathermap.org/data/3.0/onecall'.freeze
+  OPEN_WEATHER_API_KEY = '9a22a4c62a72679c1bcb33d54c02d33e'.freeze
 
-  def get_weather_for_address(geocoded_address)
+  def forecast_for_address(geocoded_address)
     begin
       uri = URI(OPEN_WEATHER_ONECALL_ENDPOINT)
       params = {

@@ -30,7 +30,7 @@ module ActiveSupport
       ]
     )
 
-    OPEN_WEATHER_ONECALL_ENDPOINT = 'https://api.openweathermap.org/data/3.0/onecall'
+    OPEN_WEATHER_ONECALL_ENDPOINT = 'https://api.openweathermap.org/data/3.0/onecall'.freeze
     setup do
       # OpenWeather response stub
 
