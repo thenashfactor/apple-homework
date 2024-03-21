@@ -1,6 +1,7 @@
-# ForecastController is the only controller in the app
-# Defines index action to enter any address
-# Defines show action to display current and daily forecasts
+# ForecastController is the only controller in the application
+# Defines :index action to enter any address
+# Defines :show action to display current and daily forecasts
+
 class ForecastController < ActionController::Base
   def index; end
 

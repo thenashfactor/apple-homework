@@ -1,7 +1,7 @@
 require 'test_helper'
-require 'cgi'
 
-# Geocoder stubs are defined in test_helper
+# Geocoder stubs are defined in test_helper to avoid network calls
+# Tests :index and :show actions for successful and error cases
 class ForecastControllerTest < ActionDispatch::IntegrationTest
   test 'index success' do
     get root_path

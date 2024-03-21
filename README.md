@@ -73,7 +73,9 @@ Daily forecasts are available for the current day and seven days afterward.
 
 ### Forecast 
 
-Forecast objects are initialized with a raw address. The raw address is geocoded on initialization and passed into the OpenWeatherClient.forecast_for_address method. This method is leveraged to make an API call to retrieve the current and daily forecasts and return a populated Forecast object. 
+Forecast objects are initialized with a raw address. The raw address is geocoded on initialization and passed into the OpenWeatherClient.forecast_for_address method. This method is leveraged to make an API call to retrieve the current and daily forecasts and return a populated Forecast object.
+
+Forecasts are cached for 30 minutes by postal code. Caching is unavailable if postal code does not exist.
 
 #### Methods
 

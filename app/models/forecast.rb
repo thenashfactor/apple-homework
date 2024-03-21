@@ -1,4 +1,5 @@
-# Retrieves and massages OpenWeather API current and daily forecasts
+# Retrieves and formats OpenWeather API current and daily forecasts
+
 class Forecast
   include ActiveModel::API
 

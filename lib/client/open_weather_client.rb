@@ -1,3 +1,6 @@
+# Uses OpenWeather One Call API client to retrieve weather forecast
+# See https://openweathermap.org/api/one-call-3 for more detail
+
 class Client::OpenWeatherClient
   OPEN_WEATHER_ONECALL_ENDPOINT = 'https://api.openweathermap.org/data/3.0/onecall'.freeze
   OPEN_WEATHER_API_KEY = '9a22a4c62a72679c1bcb33d54c02d33e'.freeze

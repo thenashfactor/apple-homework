@@ -1,6 +1,6 @@
 require 'test_helper'
 
-# Geocoder stubs are defined in test_helper
+# Tests forecast_for_address success and error cases
 class OpenWeatherClientTest < ActiveSupport::TestCase
   setup do
     @geocoder_client = Client::GeocoderClient.new

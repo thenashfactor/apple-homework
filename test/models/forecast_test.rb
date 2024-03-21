@@ -1,6 +1,6 @@
 require 'test_helper'
 
-# Geocoder stubs are defined in test_helper
+# Tests forecast response as well as caching logic (cached for 30 minutes by postal code)
 class ForecastTest < ActiveSupport::TestCase
   test 'forecast uncached and cached' do
     expected_forecast_current = {

@@ -1,4 +1,5 @@
 # Geocode a supplied address using geocoder gem functionality
+
 class Client::GeocoderClient
 
   # Raises error message if geocoding fails

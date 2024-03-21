@@ -1,6 +1,7 @@
 require 'test_helper'
 
 # Geocoder stubs are defined in test_helper
+# Tests geocode success and error cases
 class GeocoderClientTest < ActiveSupport::TestCase
   setup do
     @geocoder_client = Client::GeocoderClient.new
