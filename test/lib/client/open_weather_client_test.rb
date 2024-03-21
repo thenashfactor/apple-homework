@@ -12,6 +12,7 @@ class OpenWeatherClientTest < ActiveSupport::TestCase
     @openweather_client.forecast_for_address(geocoded_address)
   end
 
+  # Tests handling of error response from OpenWeather API
   test 'forecast_for_address error' do
     error_response = {
       'cod' => 400,

@@ -14,7 +14,11 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+
+    # Don't make external requests during test run
     WebMock.disable_net_connect!
+
+    # Stub out geocoder response
     Geocoder.configure(lookup: :test, ip_lookup: :test)
     Geocoder::Lookup::Test.set_default_stub(
       [
@@ -31,9 +35,9 @@ module ActiveSupport
     )
 
     OPEN_WEATHER_ONECALL_ENDPOINT = 'https://api.openweathermap.org/data/3.0/onecall'.freeze
-    setup do
-      # OpenWeather response stub
 
+    # Set up OpenWeather response stub
+    setup do
       successful_response = {
         'current' => {
           'dt' => 1_710_880_364,
@@ -67,6 +71,8 @@ module ActiveSupport
              )
              .to_return(status: 200, body: successful_response, headers: {})
 
+      # Clear the cache so nothing remains between tests
+      # This allows us to properly test forecast caching behavior
       Rails.cache.clear
     end
   end
