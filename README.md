@@ -6,6 +6,14 @@ This application allows a user to input an address for geocoding on the landing 
 geocoded address is then used to retrieve current and daily forecasts (next seven days) from the [OpenWeather
 One Call API](https://openweathermap.org/api/one-call-3).
 
+## Dependencies
+
+Postgres must be running on the server because Rails depends on it. However, no reads/writes to
+the database take place.
+
+Change the username for the development environment in config/database.yml to your configured Postgres
+superuser.
+
 ## Object Decomposition
 
 ### GeocoderClient 
