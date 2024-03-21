@@ -32,8 +32,8 @@ is optional and defaults to 'US'.
 #### Methods
 
 `geocode`
-- input: *raw address - string*
-- output: *Geocoder::Result object*
+- input: *raw address* - string
+- output: *Geocoder::Result* - object
 
 ### OpenWeatherClient
 
@@ -78,8 +78,8 @@ Forecast objects are initialized with a raw address. The raw address is geocoded
 #### Methods
 
 `forecast`
-- input:  *raw address - string*
-- output: *Forecast - object*
+- input:  *raw address* - string
+- output: *Forecast* - object
 
 #### Sample Response
 
