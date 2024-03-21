@@ -11,9 +11,9 @@ One Call API](https://openweathermap.org/api/one-call-3).
 ### GeocoderClient 
 
 Takes a raw address as input and leverages the Ruby geocoder gem to normalize the address.
-The geocoded address is returned as a Geocoder::Result object.
+The geocoded address is returned as a *Geocoder::Result* object.
 
-Every Geocoder::Result object exposes the following attributes:
+Every *Geocoder::Result* object exposes the following attributes:
 
 - latitude - float
 - longitude - float
@@ -32,8 +32,8 @@ is optional and defaults to 'US'.
 #### Methods
 
 `geocode`
-input: *raw address - string*
-output: *Geocoder::Result object*
+- input: *raw address - string*
+- output: *Geocoder::Result object*
 
 ### OpenWeatherClient
 
@@ -43,8 +43,8 @@ Daily forecasts are available for the current day and seven days afterward.
 #### Methods
 
 `forecast_for_address`
-input:  *Geocoder::Result object*
-output: *Hash*, see Sample Response below
+- input:  *Geocoder::Result object*
+- output: *Hash*, see Sample Response below
 
 #### Sample Response
 ```
@@ -78,8 +78,8 @@ Forecast objects are initialized with a raw address. The raw address is geocoded
 #### Methods
 
 `forecast`
-input:  *raw address - string*
-output: *Forecast - object*
+- input:  *raw address - string*
+- output: *Forecast - object*
 
 #### Sample Response
 
