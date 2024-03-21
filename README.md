@@ -12,7 +12,7 @@ Postgres must be running on the server because Rails depends on it. However, no 
 the database take place.
 
 Change the username for the development environment in config/database.yml to your configured Postgres
-superuser.
+superuser. Then, run `rails db:create` to create the `apple_homework` and `apple_homework_test` databases.
 
 ## Object Decomposition
 
